@@ -87,6 +87,7 @@ def get_prompt() -> str:
         ("Execute Python File", "execute_python_file", {"file": "<file>"}),
         ("Generate Image", "generate_image", {"prompt": "<prompt>"}),
         ("Send Tweet", "send_tweet", {"text": "<text>"}),
+        ("Add Goal", "add_goal", {"goal": "<goal>"}),
     ]
 
     # Only add the audio to text command if the model is specified
@@ -200,4 +201,4 @@ Continue (y/n): """
     global ai_name
     ai_name = config.ai_name
 
-    return config.construct_full_prompt()
+    return config.construct_full_prompt(), config

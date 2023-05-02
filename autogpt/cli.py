@@ -123,7 +123,7 @@ def main(
                     "parts of Auto-GPT with this version. "
                     "Please consider upgrading to Python 3.10 or higher.",
                 )
-        system_prompt = construct_prompt()
+        system_prompt, ai_config = construct_prompt()
         # print(prompt)
         # Initialize variables
         full_message_history = []
@@ -146,6 +146,7 @@ def main(
             full_message_history=full_message_history,
             next_action_count=next_action_count,
             system_prompt=system_prompt,
+            ai_config=ai_config,
             triggering_prompt=triggering_prompt,
         )
         agent.start_interaction_loop()

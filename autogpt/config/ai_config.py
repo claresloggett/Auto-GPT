@@ -119,3 +119,9 @@ class AIConfig:
 
         full_prompt += f"\n\n{get_prompt()}"
         return full_prompt
+
+    def add_goal(self, goal: str) -> None:
+        """
+        Append the specified goal to the current list of goals.
+        """
+        self.ai_goals.append(goal)

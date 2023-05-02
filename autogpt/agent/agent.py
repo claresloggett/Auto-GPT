@@ -40,6 +40,7 @@ class Agent:
         full_message_history,
         next_action_count,
         system_prompt,
+        ai_config,
         triggering_prompt,
     ):
         self.ai_name = ai_name
@@ -47,6 +48,7 @@ class Agent:
         self.full_message_history = full_message_history
         self.next_action_count = next_action_count
         self.system_prompt = system_prompt
+        self.ai_config = ai_config
         self.triggering_prompt = triggering_prompt
 
     def start_interaction_loop(self):
@@ -69,6 +71,9 @@ class Agent:
                     "Continuous Limit Reached: ", Fore.YELLOW, f"{cfg.continuous_limit}"
                 )
                 break
+
+            # Update to get new goals
+            self.system_prompt = self.ai_config.construct_full_prompt()
 
             # Send message to AI, get response
             with Spinner("Thinking... "):
@@ -170,7 +175,7 @@ class Agent:
             else:
                 result = (
                     f"Command {command_name} returned: "
-                    f"{execute_command(command_name, arguments)}"
+                    f"{execute_command(command_name, arguments, self)}"
                 )
                 if self.next_action_count > 0:
                     self.next_action_count -= 1
