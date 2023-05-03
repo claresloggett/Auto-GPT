@@ -18,7 +18,7 @@ from autogpt.commands.file_operations import (
     search_files,
     write_to_file,
 )
-from autogpt.commands.modify_agent import add_goal
+from autogpt.commands.modify_agent import add_goal, remove_goal
 from autogpt.commands.git_operations import clone_repository
 from autogpt.commands.google_search import google_official_search, google_search
 from autogpt.commands.image_gen import generate_image
@@ -216,6 +216,8 @@ def execute_command(command_name: str, arguments, calling_agent):
             return send_tweet(arguments["text"])
         elif command_name == "add_goal":
             return add_goal(arguments["goal"], calling_agent.ai_config)
+        elif command_name == "remove_goal":
+            return remove_goal(arguments["goal_number"], calling_agent.ai_config)
         elif command_name == "do_nothing":
             return "No action performed."
         elif command_name == "task_complete":

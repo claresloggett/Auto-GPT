@@ -88,6 +88,7 @@ def get_prompt() -> str:
         ("Generate Image", "generate_image", {"prompt": "<prompt>"}),
         ("Send Tweet", "send_tweet", {"text": "<text>"}),
         ("Add Goal", "add_goal", {"goal": "<goal>"}),
+        ("Remove Goal", "remove_goal", {"goal_number": "<goal_number>"}),
     ]
 
     # Only add the audio to text command if the model is specified

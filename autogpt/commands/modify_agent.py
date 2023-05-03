@@ -14,3 +14,24 @@ def add_goal(goal: str, ai_config: AIConfig):
     ai_config.add_goal(goal)
     ai_config.save(CFG.ai_settings_file)
     return "Goal added successfully"
+
+def remove_goal(goal_number: str, ai_config: AIConfig):
+    """Modify the agent's current list of goals by removing a single goal.
+
+    Args:
+        goal_number (int): The goal to remove. 
+            The goal_number should be 1-indexed and correspond to the list in the prompt.
+    """
+
+    try:
+        goal_index = int(goal_number)
+    except ValueError:
+        return "Removing goal failed because goal_number must be a number"
+
+    try:
+        ai_config.remove_goal(goal_number)
+    except ValueError as e:
+        return str(e)
+    
+    ai_config.save(CFG.ai_settings_file)
+    return "Goal removed successfully"

@@ -125,3 +125,13 @@ class AIConfig:
         Append the specified goal to the current list of goals.
         """
         self.ai_goals.append(goal)
+    
+    def remove_goal(self, goal_number: int) -> None:
+        """
+        Remove the specified goal from the current list of goals.
+        The goal_number should be indexed from 1.
+        """
+        if goal_number<1 or goal_number>len(self.ai_goals):
+            raise ValueError(f"Removing goal failed because there is no goal with number {goal_number}")
+        
+        self.ai_goals = self.ai_goals[:goal_number-1] + self.ai_goals[goal_number:]
