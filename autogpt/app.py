@@ -120,6 +120,7 @@ def execute_command(command_name: str, arguments, calling_agent):
         str: The result of the command
     """
     try:
+        print(f"EXECUTING COMMAND {command_name}")
         command_name = map_command_synonyms(command_name.lower())
         if command_name == "google":
             # Check if the Google API key is set and use the official search method

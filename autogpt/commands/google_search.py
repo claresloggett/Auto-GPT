@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 
 from duckduckgo_search import ddg
+from colorama import Fore
 
 from autogpt.config import Config
 
@@ -20,6 +21,7 @@ def google_search(query: str, num_results: int = 8) -> str:
     Returns:
         str: The results of the search.
     """
+    #print(Fore.RED + "Calling google search: " + query)
     search_results = []
     if not query:
         return json.dumps(search_results)
@@ -44,6 +46,7 @@ def google_official_search(query: str, num_results: int = 8) -> str | list[str]:
     Returns:
         str: The results of the search.
     """
+    #print(Fore.RED + "Calling google official API search: " + query)
 
     from googleapiclient.discovery import build
     from googleapiclient.errors import HttpError

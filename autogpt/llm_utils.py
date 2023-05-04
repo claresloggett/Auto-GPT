@@ -78,6 +78,14 @@ def create_chat_completion(
             + f"Creating chat completion with model {model}, temperature {temperature},"
             f" max_tokens {max_tokens}" + Fore.RESET
         )
+        print(
+            Fore.GREEN
+            + f"Messages sent to model: "
+            + "\n".join(
+                ["\n".join(
+                    [f"{k}: {v}" for k,v in messagedict.items()]) 
+                for messagedict in messages])
+        )
     for attempt in range(num_retries):
         backoff = 2 ** (attempt + 2)
         try:
