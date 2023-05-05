@@ -29,7 +29,7 @@ def remove_goal(goal_number: str, ai_config: AIConfig):
         return "Removing goal failed because goal_number must be a number"
 
     try:
-        ai_config.remove_goal(goal_number)
+        ai_config.remove_goal(goal_index)
     except ValueError as e:
         return str(e)
     
