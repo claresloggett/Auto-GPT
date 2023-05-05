@@ -51,7 +51,6 @@ class Agent:
         command_registry,
         config,
         system_prompt,
-        ai_config,
         triggering_prompt,
         workspace_directory,
     ):
@@ -67,7 +66,6 @@ class Agent:
         self.command_registry = command_registry
         self.config = config
         self.system_prompt = system_prompt
-        self.ai_config = ai_config
         self.triggering_prompt = triggering_prompt
         self.workspace = Workspace(workspace_directory, cfg.restrict_to_workspace)
 
@@ -93,7 +91,7 @@ class Agent:
                 break
 
             # Update to get new goals
-            self.system_prompt = self.ai_config.construct_full_prompt()
+            self.system_prompt = self.config.construct_full_prompt(self.config.prompt_generator)
 
             # Send message to AI, get response
             with Spinner("Thinking... "):
@@ -237,6 +235,7 @@ class Agent:
                     command_name,
                     arguments,
                     self.config.prompt_generator,
+                    self.config,
                 )
                 result = f"Command {command_name} returned: " f"{command_result}"
 

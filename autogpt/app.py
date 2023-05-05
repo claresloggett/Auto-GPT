@@ -3,7 +3,7 @@ import json
 from typing import Dict, List, NoReturn, Union
 
 from autogpt.agent.agent_manager import AgentManager
-from autogpt.agent.agent import Agent
+from autogpt.config.ai_config import AIConfig
 from autogpt.commands.command import CommandRegistry, command
 from autogpt.commands.modify_agent import add_goal, remove_goal
 from autogpt.commands.web_requests import scrape_links, scrape_text
@@ -96,7 +96,7 @@ def execute_command(
     command_name: str,
     arguments,
     prompt: PromptGenerator,
-    calling_agent: Agent,
+    calling_agent_config: AIConfig,
 ):
     """Execute the command and return the result
 
@@ -110,6 +110,10 @@ def execute_command(
     try:
         cmd = command_registry.commands.get(command_name)
 
+        # Handle commands which require extra arguments
+        if command_name in ["add_goal", "remove_goal"]:
+            arguments["ai_config"] = calling_agent_config
+
         # If the command is found, call it with the provided arguments
         if cmd:
             return cmd(**arguments)
@@ -119,13 +123,10 @@ def execute_command(
 
         if command_name == "memory_add":
             return get_memory(CFG).add(arguments["string"])
+        
         # TODO: Change these to take in a file rather than pasted code, if
         # non-file is given, return instructions "Input should be a python
         # filepath, write your code to file and try again
-        elif command_name == "add_goal":
-            return add_goal(arguments["goal"], calling_agent.ai_config)
-        elif command_name == "remove_goal":
-            return remove_goal(arguments["goal_number"], calling_agent.ai_config)
         elif command_name == "task_complete":
             shutdown()
         else:

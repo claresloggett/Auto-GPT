@@ -134,6 +134,13 @@ def create_chat_completion(
     logger.debug(
         f"{Fore.GREEN}Creating chat completion with model {model}, temperature {temperature}, max_tokens {max_tokens}{Fore.RESET}"
     )
+    print(
+        Fore.GREEN
+        + f"Messages sent to model: "
+        + "\n".join([
+            f"[role {message['role']}]: {message['content']}"
+            for message in messages])
+    )
     for plugin in cfg.plugins:
         if plugin.can_handle_chat_completion(
             messages=messages,

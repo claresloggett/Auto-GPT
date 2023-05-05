@@ -129,6 +129,7 @@ def run_auto_gpt(
     command_registry.import_commands("autogpt.commands.twitter")
     command_registry.import_commands("autogpt.commands.web_selenium")
     command_registry.import_commands("autogpt.commands.write_tests")
+    command_registry.import_commands("autogpt.commands.modify_agent")
     command_registry.import_commands("autogpt.app")
 
     ai_name = ""

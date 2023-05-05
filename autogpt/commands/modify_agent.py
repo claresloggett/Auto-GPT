@@ -1,9 +1,15 @@
 
 from autogpt.config.ai_config import AIConfig
 from autogpt.config import Config
+from autogpt.commands.command import command
 
 CFG = Config()
 
+@command(
+    "add_goal",
+    "Add Goal",
+    '"goal": "<goal>"',
+)
 def add_goal(goal: str, ai_config: AIConfig):
     """Modify the agent's current list of goals by adding a single new goal.
 
@@ -15,6 +21,11 @@ def add_goal(goal: str, ai_config: AIConfig):
     ai_config.save(CFG.ai_settings_file)
     return "Goal added successfully"
 
+@command(
+    "remove_goal",
+    "Remove Goal",
+    '"goal_number": "<goal_number>"',
+)
 def remove_goal(goal_number: str, ai_config: AIConfig):
     """Modify the agent's current list of goals by removing a single goal.
 
